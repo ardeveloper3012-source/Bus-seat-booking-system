@@ -1,0 +1,398 @@
+/* Page-specific styles - Search block, sections */
+
+/* Hero Container - holds hero image and search block stacked (for index.html only) */
+.hero-container {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin-bottom: 100px;
+  padding-top: 120px;
+}
+
+/* Hero image - original height restored */
+.hero-container .hero {
+  background: url('../images/bus-banner.jpg') no-repeat center center/cover;
+  height: 500px;
+  width: 100%;
+}
+.hero-container .hero img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Search block - Blue Card: 30% on image, 70% below (for index.html only with hero-container) */
+.search-block {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20%);
+  background: linear-gradient(135deg, #0052cc 0%, #0066ff 100%);
+  padding: 30px 40px;
+  border-radius: 20px;
+  width: 85%;
+  max-width: 900px;
+  z-index: 100;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 82, 204, 0.4);
+  color: white;
+}
+
+.hero-container .search-btn {
+  display: block;
+  margin: 25px auto 0 auto;
+}
+
+/* Search header text - aligned left */
+.search-header {
+  text-align: left;
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+.search-header h2 {
+  color: #fff;
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+.search-subtext {
+  color: #fff;
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+/* Trip Toggle - Segmented Control - Larger */
+.trip-toggle {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 6px;
+  margin-bottom: 25px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+  background: white;
+  color: #0052cc;
+}
+
+.toggle-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Search Row - Three Horizontal Inputs - Larger */
+.search-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 16px 20px 16px 50px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0052cc;
+  font-size: 20px;
+}
+
+.search-btn {
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #e65c00;
+  transform: translateY(-2px);
+}
+
+/* Suggestions Dropdown */
+.suggestions-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestions-dropdown.show {
+  display: block;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+}
+
+.suggestion-item:hover {
+  background: #f5f5f5;
+}
+
+/* Location Icon for suggestions */
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 16px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item .location-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: #dc3545;
+}
+
+.suggestion-item .location-icon::before {
+  content: "📍";
+}
+
+.suggestion-item input[type="radio"] {
+  display: none;
+}
+
+.suggestion-item span {
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Date Input Styles - Larger */
+.date-wrapper {
+  flex: 1.3;
+}
+
+.date-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Objective Section */
+.objective-section {
+  padding: 20px 20px 20px 40px;
+  max-width: 1200px;
+  margin-top: 120px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.objective-heading {
+  color: #1a1a1a;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 0;
+  padding-top: 0;
+  line-height: 1.3;
+}
+
+.objective-para {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+  padding: 0;
+}
+
+/* How to Book Section */
+.howto-section {
+  padding: 20px 20px 20px 40px;
+  max-width: 1200px;
+  margin: 0;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.howto-heading {
+  color: #1a1a1a;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 0;
+  padding-top: 0;
+  line-height: 1.3;
+}
+
+.howto-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.howto-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #666666;
+}
+
+.bullet-arrow {
+  color: #000000;
+  font-size: 18px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Responsive Design for page-specific elements */
+@media (max-width: 768px) {
+  .hero {
+    height: 340px;
+  }
+  .hero img {
+    height: 340px;
+  }
+  .search-block {
+    width: 90%;
+    margin: -102px auto 25px auto;
+    padding: 20px;
+  }
+  .search-header h2 {
+    font-size: 22px;
+  }
+  .search-row {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 270px;
+  }
+  .hero img {
+    height: 270px;
+  }
+  .search-block {
+    width: 95%;
+    margin: -81px auto 20px auto;
+    padding: 15px;
+  }
+  .search-header h2 {
+    font-size: 18px;
+  }
+  .search-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+}
+
+/* Responsive Design for sections */
+@media (max-width: 1024px) {
+  .objective-section,
+  .howto-section {
+    padding: 20px 20px 20px 30px;
+    max-width: 100%;
+  }
+  .objective-heading,
+  .howto-heading {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .objective-section,
+  .howto-section {
+    padding: 20px 15px 20px 20px;
+    max-width: 100%;
+  }
+  .objective-heading,
+  .howto-heading {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .objective-para {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .objective-section,
+  .howto-section {
+    padding: 20px 12px 20px 15px;
+    max-width: 100%;
+  }
+  .objective-heading,
+  .howto-heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .objective-para {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .howto-list li {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .bullet-arrow {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+}
