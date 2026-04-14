@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation - Movenco</title>
+  <link rel="icon" href="images/favlogo.png" type="image/png" sizes="50x50">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/userinfo.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/userinfo.js" defer></script>
+</head>
+<body>
+  <!-- Header -->
+  <header id="mainHeader">
+    <div class="logo">
+      <img src="images/logo.png" alt="Bus Logo" class="logo-img">
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="Buses.html" class="nav-link">Buses</a>
+      <a href="Selection.html" class="nav-link">Seat Layout</a>
+      <a href="Userinfo.html" class="nav-link active">User Information</a>
+    </nav>
+    <nav>
+      <button id="loginBtn" onclick="openModal('loginModal')">Login</button>
+      <button id="signupBtn" onclick="openModal('signupModal')">Signup</button>
+      <button id="adminBtn" onclick="openModal('adminModal')">Admin</button>
+    </nav>
+  </header>
+
+  <!-- Booking Summary & Form Container -->
+  <h2>Provide the following information to proceed booking.</h2>
+  <div class="booking-container">
+    <!-- Left Summary Card -->
+    <div class="summary-card">
+      <h2><i class="fas fa-receipt"></i> Booking Summary</h2>
+
+      <div class="route-info">
+        <div class="route-line">
+          <i class="fas fa-map-marker-alt route-from-icon"></i>
+          <span id="summaryFrom" style="opacity: 0.5;">Route from</span>
+          <i class="fas fa-arrow-right route-arrow"></i>
+          <i class="fas fa-flag-checkered route-to-icon"></i>
+          <span id="summaryTo" style="opacity: 0.5;">Route to</span>
+        </div>
+      </div>
+
+      <div class="bus-details">
+        <div><i class="fas fa-bus"></i> <span id="summaryBus">Daewoo Express</span></div>
+        <div><i class="fas fa-clock"></i> <span id="summaryTime">08:00 AM - 03:00 PM</span></div>
+        <div><i class="fas fa-calendar"></i> <span id="summaryDate">Fri, 28 Feb</span></div>
+      </div>
+      <div class="selected-seats">
+        <h3>Selected Seats</h3>
+        <div id="seatsList" class="seats-grid"></div>
+      </div>
+      <div class="total-price">
+        <div class="price-label">Total Amount</div>
+        <span class="price-value" id="summaryTotal">Rs. 0</span>
+      </div>
+    </div>
+
+    <!-- Right Form Card -->
+    <div class="form-card">
+      <h2><i class="fas fa-user"></i> Passenger Details</h2>
+      <p class="form-subtitle">Enter details to reserve seats (Payment later)</p>
+      
+      <form id="bookingForm">
+        <div class="input-group">
+          <label for="passengerName">Full Name *</label>
+          <input type="text" id="passengerName" required>
+        </div>
+        <div class="input-group">
+          <label for="passengerPhone">Phone Number *</label>
+          <input type="tel" id="passengerPhone" required>
+        </div>
+        <div class="input-group">
+          <label for="passengerCnic">CNIC / ID Number *</label>
+          <input type="text" id="passengerCnic" placeholder="XXXXX-XXXXXXX-X" required>
+        </div>
+        <div class="input-group">
+          <label for="passengerEmail">Email (Optional)</label>
+          <input type="email" id="passengerEmail">
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="back-btn" onclick="window.history.back()">← Back to Seats</button>
+          <button type="submit" class="confirm-btn">Reserve Seats <i class="fas fa-check"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal-overlay">
+    <div class="modal-container success-modal">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Booking Reserved!</h2>
+      <p id="successMessage">Your seats have been reserved successfully. Complete payment within 30 minutes.</p>
+      <div class="success-actions">
+        <button onclick="window.location.href='index.html'" class="btn-primary">Home</button>
+        <button onclick="printBooking()" class="btn-secondary"><i class="fas fa-print"></i> Print</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeModal('loginModal')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <h2 class="modal-title">Welcome Back</h2>
+      <p class="modal-subtitle">Sign in to continue your journey</p>
+      
+      <!-- Error/Success Messages -->
+      <div id="loginError" class="modal-error"></div>
+      <div id="loginSuccess" class="modal-success"></div>
+      
+      <form id="loginFormModal">
+        <div class="modal-input-group">
+          <label for="loginEmailModal">Email Address</label>
+          <input type="email" id="loginEmailModal" class="modal-input" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="modal-input-group">
+          <label for="loginPasswordModal">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="loginPasswordModal" class="modal-input" placeholder="Enter your password" required>
+            <button type="button" class="password-toggle" onclick="togglePassword('loginPasswordModal')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="modal-options">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="modal-submit-btn">Sign In</button>
+      </form>
+      
+      <div class="modal-divider">
+        <span>or continue with</span>
+      </div>
+      
+      <button class="social-btn google-btn" onclick="handleGoogleLogin()">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Sign In with Google
+      </button>
+      
+      <button class="social-btn facebook-btn" onclick="handleFacebookLogin()">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Sign In with Facebook
+      </button>
+      
+      <p class="modal-switch-text">
+        Don't have an account? <a onclick="switchModal('loginModal', 'signupModal')">Sign up</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeModal('signupModal')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <h2 class="modal-title">Welcome to Bookme</h2>
+      <p class="modal-subtitle">Please Provide details below to register your account</p>
+      
+      <!-- Error/Success Messages -->
+      <div id="signupError" class="modal-error"></div>
+      <div id="signupSuccess" class="modal-success"></div>
+      
+      <form id="signupFormModal">
+        <div class="modal-input-group">
+          <label for="signupNameModal">Full Name</label>
+          <input type="text" id="signupNameModal" class="modal-input" placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="modal-input-group">
+          <label for="signupEmailModal">Email Address</label>
+          <input type="email" id="signupEmailModal" class="modal-input" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="modal-input-group">
+          <label for="signupPhoneModal">Phone Number</label>
+          <input type="tel" id="signupPhoneModal" class="modal-input" placeholder="Enter your phone number" required>
+        </div>
+        
+        <div class="modal-input-group">
+          <label for="signupPasswordModal">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="signupPasswordModal" class="modal-input" placeholder="Enter Password" required minlength="6">
+            <button type="button" class="password-toggle" onclick="togglePassword('signupPasswordModal')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="modal-input-group">
+          <label for="signupConfirmPasswordModal">Confirm Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="signupConfirmPasswordModal" class="modal-input" placeholder="Confirm Password" required>
+            <button type="button" class="password-toggle" onclick="togglePassword('signupConfirmPasswordModal')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <button type="submit" class="modal-submit-btn">Sign Up</button>
+      </form>
+      
+      <div class="modal-divider">
+        <span>or continue with</span>
+      </div>
+      
+      <button class="social-btn google-btn" onclick="handleGoogleLogin()">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Sign In with Google
+      </button>
+      
+      <button class="social-btn facebook-btn" onclick="handleFacebookLogin()">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Sign In with Facebook
+      </button>
+      
+      <p class="modal-switch-text">
+        Already have an account? <a onclick="switchModal('signupModal', 'loginModal')">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div id="adminModal" class="modal-overlay admin-modal">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeModal('adminModal')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <h2 class="modal-title">Admin Login</h2>
+      <p class="modal-subtitle">Access the admin dashboard</p>
+      
+      <!-- Error/Success Messages -->
+      <div id="adminError" class="modal-error"></div>
+      <div id="adminSuccess" class="modal-success"></div>
+      
+      <form id="adminFormModal">
+        <div class="modal-input-group">
+          <label for="adminUsernameModal">Username</label>
+          <input type="text" id="adminUsernameModal" class="modal-input" placeholder="Enter admin username" required>
+        </div>
+        
+        <div class="modal-input-group">
+          <label for="adminPasskeyModal">Passkey</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="adminPasskeyModal" class="modal-input" placeholder="Enter admin passkey" required>
+            <button type="button" class="password-toggle" onclick="togglePassword('adminPasskeyModal')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <button type="submit" class="modal-submit-btn">Login as Admin</button>
+      </form>
+      
+      <p class="modal-switch-text">
+        <a onclick="switchModal('adminModal', 'loginModal')">Back to User Login</a>
+      </p>
+    </div>
+  </div>
+
+<!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>About:</h4>
+        <ul class="footer-list">
+          <li><a href="about.html" class="footer-link">About movenco</a></li>
+          <li><a href="contact.html" class="footer-link">Contact us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Services:</h4>
+        <ul class="footer-list">
+          <li><a href="user_services.html" class="footer-link">User related services</a></li>
+          <li><a href="admin_services.html" class="footer-link">Admin related services</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support:</h4>
+        <ul class="footer-list">
+          <li><a href="privacy.html" class="footer-link">Privacy policy</a></li>
+          <li><a href="terms.html" class="footer-link">Terms of service</a></li>
+        </ul>
+      </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Abdul Rehman | Askari Institute of Technology</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,837 @@
+/* Page-specific styles - Buses Page */
+
+/* Search block - Blue Box - Copied from index.css for consistency */
+.search-block {
+  margin: 110px auto 30px auto;
+  width: 55%;
+  background: linear-gradient(135deg, #0052cc 0%, #0066ff 100%);
+  padding: 40px 40px;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.3);
+  text-align: center;
+  position: relative;
+  z-index: 50;
+}
+
+/* Search header text - aligned left */
+.search-header {
+  text-align: left;
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+
+.search-header h2 {
+  color: #fff;
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.search-subtext {
+  color: #fff;
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+/* Trip Toggle - Segmented Control */
+.trip-toggle {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 6px;
+  margin-bottom: 25px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+  background: white;
+  color: #0052cc;
+}
+
+.toggle-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Search Row */
+.search-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 16px 20px 16px 50px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0052cc;
+  font-size: 20px;
+}
+
+.search-btn {
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-btn:hover {
+  background: #e65c00;
+  transform: translateY(-2px);
+}
+
+/* Suggestions Dropdown */
+.suggestions-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestions-dropdown.show {
+  display: block;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+}
+
+.suggestion-item:hover {
+  background: #f5f5f5;
+}
+
+.suggestion-item .location-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.suggestion-item .location-icon::before {
+  content: "📍";
+  font-size: 14px;
+  line-height: 1;
+}
+
+.suggestion-item input[type="radio"] {
+  display: none;
+}
+
+.suggestion-item span {
+  color: #333;
+  font-size: 14px;
+}
+
+/* Date Input Styles */
+.date-wrapper {
+  flex: 1.3;
+}
+
+.date-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Bus Results Container */
+.bus-results-container {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto 50px auto;
+  padding: 0 20px;
+  gap: 30px;
+  box-sizing: border-box;
+}
+
+/* Filter Sidebar */
+.filter-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.filter-header h3 {
+  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reset-btn {
+  background: none;
+  border: none;
+  color: #0052cc;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.filter-section {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-section:last-child {
+  border-bottom: none;
+}
+
+.filter-section h4 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #444;
+  position: relative;
+  padding-left: 30px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.checkbox-label input:checked ~ .checkmark {
+  background-color: #0052cc;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Price Range Slider */
+.price-range-container {
+  padding: 10px 0;
+}
+
+.price-range-container input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 5px;
+  background: #e0e0e0;
+  outline: none;
+  -webkit-appearance: none;
+  margin-bottom: 15px;
+}
+
+.price-range-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0052cc;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 82, 204, 0.4);
+}
+
+.price-range-container input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0052cc;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 82, 204, 0.4);
+}
+
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.price-value {
+  font-weight: 700;
+  color: #0052cc;
+  font-size: 16px;
+}
+
+/* Main Results */
+.bus-results-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Sorting Bar */
+.sorting-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 12px;
+  padding: 15px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.route-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.sort-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.sort-tab {
+  padding: 10px 20px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+}
+
+.sort-tab.active {
+  background: #0052cc;
+  border-color: #0052cc;
+  color: white;
+}
+
+/* Bus Cards */
+.bus-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bus-card {
+  background: white;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.bus-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.bus-card-top {
+  display: flex;
+  padding: 25px;
+  gap: 30px;
+  flex: 1;
+}
+
+.bus-operator {
+  width: 180px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.bus-logo {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #0052cc 0%, #003d99 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.bus-logo .fa-bus {
+  color: white;
+  font-size: 24px;
+}
+
+.price-label {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.bus-operator-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.bus-type-badge {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.bus-type-badge.business { background: #e3f2fd; color: #1565c0; }
+.bus-type-badge.luxury { background: #fff3e0; color: #e65100; }
+.bus-type-badge.ac { background: #e8f5e9; color: #2e7d32; }
+.bus-type-badge.non-ac { background: #ffebee; color: #c62828; }
+
+/* Time & Route */
+.bus-times {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.time-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.time-point {
+  text-align: center;
+  min-width: 80px;
+}
+
+.departure-time, .arrival-time {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.time-arrow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.arrow-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #0052cc, #003d99);
+  position: relative;
+  margin: 8px 0;
+}
+
+.duration {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Amenities */
+.bus-amenities {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.amenity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #555;
+  background: #f5f5f5;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+/* Price Section */
+.bus-price-section {
+  width: 160px;
+  min-width: 160px;
+  background: linear-gradient(135deg, #0052cc 0%, #003d99 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 20px;
+  text-align: center;
+}
+
+.price-amount {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
+
+.seats-info {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 10px 0;
+}
+
+.book-btn {
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+}
+
+.book-btn:hover {
+  background: #e65c00;
+}
+
+/* Card Bottom */
+.bus-card-bottom {
+  background: #f8f9fa;
+  padding: 12px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Empty State */
+.no-buses-found {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .bus-results-container { flex-direction: column; }
+  .filter-sidebar { width: 100%; position: static; }
+}
+
+@media (max-width: 768px) {
+  .search-block { width: 90% !important; margin: 70px auto 25px !important; }
+  .bus-card-top { flex-direction: column; }
+  .bus-operator { width: 100%; flex-direction: row; }
+  .bus-price-section { width: 100%; flex-direction: row; justify-content: space-between; }
+}
+
+@media (max-width: 480px) {
+  .search-block { width: 95% !important; }
+  .departure-time, .arrival-time { font-size: 18px; }
+  .price-amount { font-size: 24px; }
+}
+
+/* Bus Section */
+.bus-section { margin-bottom: 30px; }
+
+.section-title {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #0052cc;
+}
+
+.return-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 3px dashed #e0e0e0;
+}
+
+.return-badge {
+  display: inline-block;
+  background: #0052cc;
+  color: white;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.female-friendly-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+  color: white;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Modal Styles - Matching Login/Signup Modal */
+#busDetailsModal .modal-container { 
+  max-width: 520px; 
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Sticky Header for Bus Details Modal - Keeps close button fixed while scrolling */
+#busDetailsModal .modal-container > .modal-close-btn {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 5;
+  float: right;
+  margin-top: -8px;
+}
+
+#busDetailsModal .modal-alert {
+  position: sticky;
+  top: 0;
+  background: #e3f2fd;
+  z-index: 4;
+}
+
+.modal-alert {
+  background: #e3f2fd;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px 16px 0 0;
+}
+
+.trip-timeline { padding: 25px 20px; }
+
+.timeline-point {
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0052cc;
+}
+
+.departure-point .timeline-dot { background: #4caf50; }
+.arrival-point .timeline-dot { background: #f44336; }
+
+.timeline-content {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.trip-time { font-size: 22px; font-weight: 700; color: #1a1a1a; }
+.trip-city { font-size: 16px; font-weight: 700; color: #1a1a1a; }
+
+.timeline-middle { padding-left: 35px; margin: 15px 0; }
+
+.timeline-connector {
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #4caf50, #0052cc, #f44336);
+}
+
+.trip-duration { font-size: 18px; font-weight: 700; }
+
+.amenities-section { padding: 20px; border-top: 1px solid #f0f0f0; }
+.amenities-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.amenity_chip { background: #f5f5f5; padding: 8px 14px; border-radius: 20px; font-size: 13px; }
+
+.image-gallery { padding: 20px; border-top: 1px solid #f0f0f0; }
+.gallery-thumbs { display: flex; gap: 12px; }
+.gallery-thumb { width: 80px; height: 60px; background: #e0e0e0; border-radius: 8px; }
+
+.modal-footer { padding: 20px; border-top: 1px solid #f0f0f0; }
+
+.go-to-seat-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #0052cc 0%, #003d99 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 20000;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-overlay.active { display: flex; }
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+#lightboxImage { max-width: 90%; max-height: 80vh; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 20px;
+  border-radius: 20px;
+}
